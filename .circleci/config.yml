@@ -27,8 +27,8 @@ jobs:
             - v1-dependencies-
 
       - run:
-        name: Install dependencies
-        command: composer install -n --prefer-dist
+          name: Install dependencies
+          command: composer install -n --prefer-dist
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
@@ -45,8 +45,8 @@ jobs:
       - attach_workspace:
           at: /home/circleci/project
       - run:
-        name: PHPUnit tests
-        command: ./vendor/bin/phpunit
+          name: PHPUnit tests
+          command: ./vendor/bin/phpunit
 
 workflows:
   test:
