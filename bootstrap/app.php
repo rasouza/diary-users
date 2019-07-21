@@ -23,10 +23,11 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades(
     true,
-    [Laravel\Socialite\Facades\Socialite::class => 'Socialite']
+    [
+        Laravel\Socialite\Facades\Socialite::class => 'Socialite',
+        Jenssegers\Mongodb\Eloquent\Model::class => 'Eloquent'
+    ]
 );
-
-$app->withEloquent();
 
 $app->configure('services');
 
@@ -85,6 +86,9 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Laravel\Socialite\SocialiteServiceProvider::class);
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+
+$app->withEloquent();
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return config('services.github');
+    return 'Hello Users!';
 });
 
 $router->get('login/github', 'Auth\LoginController@redirectGithub');
