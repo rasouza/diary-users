@@ -84,7 +84,7 @@ workflows:
       - test:
           requires:
             - build
-      - docker-publish:
+      - docker/publish:
           image: rasouza/$CIRCLE_PROJECT_REPONAME
           tag: latest
           dockerfile: .circleci/Dockerfile
