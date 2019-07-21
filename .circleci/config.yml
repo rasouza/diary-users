@@ -46,12 +46,18 @@ jobs:
       - run: ./vendor/bin/phpunit
 
 workflows:
-  deploy:
+  test:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - test:
           requires:
             - build
+          filters:
+            tags:
+              only: /.*/
       - docker/publish:
           image: rasouza/$CIRCLE_PROJECT_REPONAME
           tag: ${CIRCLE_TAG/v/''}
