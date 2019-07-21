@@ -13,7 +13,7 @@ executors:
       - image: rasouza/php:7.2-fpm
 
 jobs:
-  building:
+  build:
     executor: diary-api
     steps:
       - checkout
@@ -38,11 +38,7 @@ jobs:
           paths:
             - .
 
-
-      # prepare the database
-      # - run: touch storage/testing.sqlite
-      # - run: php artisan migrate --env=testing --database=sqlite_testing --force
-  testing:
+  test:
     executor: diary-api
     steps:
       - attach_workspace:
@@ -50,14 +46,27 @@ jobs:
       - run: ./vendor/bin/phpunit
 
 workflows:
-  build_and_push:
+  test:
     jobs:
-      - building
-      - testing:
+      - build
+      - test:
           requires:
-            - building
+            - build
+  deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
       - docker/publish:
-          requires:
-            - testing
           image: rasouza/$CIRCLE_PROJECT_REPONAME
+          tag: ${CIRCLE_TAG/v/''}
           dockerfile: .circleci/Dockerfile
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+          requires:
+            - test
+
