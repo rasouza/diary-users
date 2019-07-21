@@ -15,5 +15,9 @@ $router->get('/', function () use ($router) {
     return 'Hello Users!';
 });
 
+$router->get('sandbox', function() use ($router) {
+    dd(App\User::first()->tokens);
+});
+
 $router->get('login/github', 'Auth\LoginController@redirectGithub');
 $router->get('oauth/github/callback', 'Auth\LoginController@handleGithubCallback');
