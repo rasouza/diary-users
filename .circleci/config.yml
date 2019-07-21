@@ -32,6 +32,12 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+      - run: pwd
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
 
       # prepare the database
       # - run: touch storage/testing.sqlite
@@ -39,22 +45,19 @@ jobs:
   testing:
     executor: diary-api
     steps:
-      # run tests with phpunit or codecept
+      - attach_workspace:
+          at: /home/circleci/project
       - run: ./vendor/bin/phpunit
 
-  pushing:
-    executor: diary-api
-    steps:
-      - docker/publish:
-        image: rasouza/$CIRCLE_PROJECT_REPONAME
-
 workflows:
-  build-and-push:
+  build_and_push:
     jobs:
       - building
       - testing:
-        requires:
-          - building
-      - pushing:
-        requires:
-          - testing
+          requires:
+            - building
+      - docker/publish:
+          requires:
+            - testing
+          image: rasouza/$CIRCLE_PROJECT_REPONAME
+          dockerfile: .circleci/Dockerfile
