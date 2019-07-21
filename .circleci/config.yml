@@ -46,7 +46,9 @@ jobs:
           at: /home/circleci/project
       - run:
           name: PHPUnit tests
-          command: ./vendor/bin/phpunit
+          command: ./vendor/bin/phpunit --log-junit $CIRCLE_WORKING_DIRECTORY/test-results/phpunit/junit.xml
+      - store_test_results:
+          path: $CIRCLE_WORKING_DIRECTORY/test-results
 
 workflows:
   test:
