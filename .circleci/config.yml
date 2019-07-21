@@ -26,13 +26,14 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run:
+        name: Install dependencies
+        command: composer install -n --prefer-dist
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
-      - run: pwd
       - persist_to_workspace:
           root: .
           paths:
@@ -43,7 +44,9 @@ jobs:
     steps:
       - attach_workspace:
           at: /home/circleci/project
-      - run: ./vendor/bin/phpunit
+      - run:
+        name: PHPUnit tests
+        command: ./vendor/bin/phpunit
 
 workflows:
   test:
@@ -71,3 +74,19 @@ workflows:
           requires:
             - test
 
+  # Publish with latest tag commits from master
+  master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - test:
+          requires:
+            - build
+      - docker-publish:
+          image: rasouza/$CIRCLE_PROJECT_REPONAME
+          tag: latest
+          dockerfile: .circleci/Dockerfile
+          requires:
+            - test
