@@ -21,9 +21,14 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-$app->withFacades();
+$app->withFacades(
+    true,
+    [Laravel\Socialite\Facades\Socialite::class => 'Socialite']
+);
 
 $app->withEloquent();
+
+$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +84,7 @@ $app->singleton(
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
+$app->register(Laravel\Socialite\SocialiteServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -96,5 +101,6 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
 
 return $app;

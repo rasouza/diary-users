@@ -12,5 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Hello Users!';
+    return config('services.github');
 });
+
+$router->get('login/github', 'Auth\LoginController@redirectGithub');
+$router->get('oauth/github/callback', 'Auth\LoginController@handleGithubCallback');
