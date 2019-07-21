@@ -14,6 +14,28 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
+        'nickname' => $faker->userName,
         'email' => $faker->email,
+        'avatar' => $faker->imageUrl,
+        'tokens' => [
+            'github' => $faker->md5
+        ]
+    ];
+});
+
+$factory->state(App\User::class, 'connected', function(Faker\Generator $faker) {
+    return [
+        'tokens' => [
+            'github' => $faker->md5,
+            'twitter' => $faker->md5
+        ]
+    ];
+});
+
+$factory->state(App\User::class, 'twitter', function(Faker\Generator $faker) {
+    return [
+        'tokens' => [
+            'twitter' => $faker->md5
+        ]
     ];
 });
