@@ -2,22 +2,19 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
-jobs:
-  build:
+version: 2.1
+
+orbs:
+  docker: circleci/docker@0.5.10
+
+executors:
+  diary-api:
     docker:
-      # Specify the version you desire here
       - image: rasouza/php:7.2-fpm
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      #
-      # - image: redis:2.8.19
-
+jobs:
+  build:
+    executor: diary-api
     steps:
       - checkout
 
@@ -29,16 +26,69 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run:
+          name: Install dependencies
+          command: composer install -n --prefer-dist
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
-      # prepare the database
-      # - run: touch storage/testing.sqlite
-      # - run: php artisan migrate --env=testing --database=sqlite_testing --force
+  test:
+    executor: diary-api
+    steps:
+      - attach_workspace:
+          at: /home/circleci/project
+      - run:
+          name: PHPUnit tests
+          command: ./vendor/bin/phpunit --log-junit test-results/phpunit/junit.xml
+      - store_test_results:
+          path: test-results
 
-      # run tests with phpunit or codecept
-      - run: ./vendor/bin/phpunit
+workflows:
+  test:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+      - docker/publish:
+          image: rasouza/$CIRCLE_PROJECT_REPONAME
+          tag: ${CIRCLE_TAG/v/''}
+          dockerfile: .circleci/Dockerfile
+          # Only publish to DockerHub tagged commits
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+          requires:
+            - test
+
+  # Publish with latest tag commits from master
+  master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - test:
+          requires:
+            - build
+      - docker/publish:
+          image: rasouza/$CIRCLE_PROJECT_REPONAME
+          tag: latest
+          dockerfile: .circleci/Dockerfile
+          requires:
+            - test
