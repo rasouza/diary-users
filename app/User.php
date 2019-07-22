@@ -23,10 +23,13 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
     ];
 
     public static function firstOrNew($socialiteUser) {
+        $user = self::where('email', $socialiteUser->getEmail())->first();
+        if ($user)
+            return $user;
+
         $userData = collect($socialiteUser)->only(['name', 'nickname', 'avatar', 'email']);
 
-        $user = self::where('email', $socialiteUser->getEmail())->first();
-        return $user ?? self::create($userData);
+        return self::create($userData->toArray());
     }
 
     public function tokens() {
