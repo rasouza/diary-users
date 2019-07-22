@@ -5,7 +5,7 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 use App\Services\GithubLogin;
 
-class LoginTest extends TestCase
+class UserTest extends TestCase
 {
     use DatabaseMigrations;
     /**

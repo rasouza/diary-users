@@ -12,8 +12,29 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 1)->create();
-        factory(User::class, 1)->states('twitter')->create();
-        factory(User::class, 1)->states('connected')->create();
+        factory(User::class, 1)->create()->each(function ($user) {
+            $user->tokens()->save(
+                factory(App\Token::class)->make()
+            );
+        });
+
+        factory(User::class, 1)->create()->each(function ($user) {
+            $user->tokens()->saveMany([
+                factory(App\Token::class)
+                    ->states('github')
+                    ->make(),
+                factory(App\Token::class)
+                    ->states('twitter')
+                    ->make(),
+            ]);
+        });
+
+        factory(User::class, 1)->create()->each(function ($user) {
+            $user->tokens()->save(
+                factory(App\Token::class)
+                    ->states('twitter')
+                    ->make()
+            );
+        });
     }
 }
