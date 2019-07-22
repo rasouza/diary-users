@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Socialite;
 
+use App\GithubUser;
+
 class LoginController extends Controller
 {
     /**
@@ -25,7 +27,7 @@ class LoginController extends Controller
     public function handleGithubCallback()
     {
         $user = Socialite::driver('github')->stateless()->user();
-        dd($user);
-        // $user->token;
+        $response = GithubUser::auth($user);
+        return response()->json($response);
     }
 }

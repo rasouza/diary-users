@@ -7,6 +7,7 @@ use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Moloquent;
+use DB;
 
 class User extends Moloquent implements AuthenticatableContract, AuthorizableContract
 {
@@ -21,14 +22,12 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
         'name', 'email', 'nickname', 'avatar'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-    ];
+    public static function firstOrNew($socialiteUser) {
+        $userData = collect($socialiteUser)->only(['name', 'nickname', 'avatar', 'email']);
+
+        $user = self::where('email', $socialiteUser->getEmail())->first();
+        return $user ?? self::create($userData);
+    }
 
     public function tokens() {
         return $this->embedsMany(Token::class);
