@@ -1,6 +1,6 @@
-FROM php:7.2-fpm
+FROM circleci/php:7.2-cli
 
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+RUN sudo apt update \
+    && sudo apt install libbson-dev libmongoc-dev \
+    && sudo pecl install mongodb-1.5.5 \
+    && sudo docker-php-ext-enable mongodb
