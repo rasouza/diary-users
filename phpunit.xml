@@ -25,7 +25,5 @@
         <env name="DB_HOST" value="127.0.0.1"/>
         <env name="DB_PORT" value="27017"/>
         <env name="DB_DATABASE" value="diary-api-testing"/>
-        <env name="DB_USERNAME" value="admin"/>
-        <env name="DB_PASSWORD" value="admin"/>
     </php>
 </phpunit>
