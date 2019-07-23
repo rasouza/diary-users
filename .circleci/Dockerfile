@@ -1,6 +1,3 @@
-FROM php:7.2-fpm
-
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+FROM circleci/php:7.2-cli
+RUN sudo pecl install mongodb-1.5.5 \
+    && sudo docker-php-ext-enable mongodb

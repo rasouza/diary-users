@@ -10,7 +10,7 @@ orbs:
 executors:
   diary-api:
     docker:
-      - image: rasouza/php:7.2-fpm
+      - image: rasouza/php:7.2-cli
 
 jobs:
   build:
@@ -76,7 +76,7 @@ workflows:
           requires:
             - test
 
-  # Publish with latest tag commits from master
+  # Commits in master branch are published with tag latest
   master:
     jobs:
       - build:
