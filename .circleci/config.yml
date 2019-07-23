@@ -11,6 +11,7 @@ executors:
   diary-api:
     docker:
       - image: rasouza/php:7.2-cli
+      - image: mongo:4.1
 
 jobs:
   build:
