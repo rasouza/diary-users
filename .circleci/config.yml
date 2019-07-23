@@ -12,6 +12,10 @@ executors:
     docker:
       - image: rasouza/php:7.2-cli
       - image: mongo:4.1
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: admin
+          MONGO_INITDB_DATABASE: diary-api
 
 jobs:
   build:
