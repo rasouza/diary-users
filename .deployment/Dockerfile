@@ -5,8 +5,9 @@ RUN sudo apt update \
     && sudo pecl install mongodb-1.5.5 \
     && sudo docker-php-ext-enable mongodb
 
-WORKDIR /var/www/html
+WORKDIR /home/circleci
 
-COPY . .
+COPY --chown="circleci:circleci" . .
+RUN composer install
 
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
