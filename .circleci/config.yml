@@ -72,7 +72,7 @@ workflows:
       - docker/publish:
           image: rasouza/$CIRCLE_PROJECT_REPONAME
           tag: ${CIRCLE_TAG/v/''}
-          dockerfile: .circleci/Dockerfile
+          dockerfile: .deployment/Dockerfile
           # Only publish to DockerHub tagged commits
           filters:
             tags:
@@ -95,6 +95,6 @@ workflows:
       - docker/publish:
           image: rasouza/$CIRCLE_PROJECT_REPONAME
           tag: latest
-          dockerfile: .circleci/Dockerfile
+          dockerfile: .deployment/Dockerfile
           requires:
             - test

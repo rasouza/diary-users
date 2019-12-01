@@ -1,11 +1,16 @@
 version: '3.4'
 
 services:
-  db:
-    image: mongo:4.1
+  # db:
+  #   image: mongo:4.1
+  #   ports:
+  #     - '27017:27017'
+  #   volumes:
+  #     - ./storage/database:/data/db
+  #   environment:
+  #     MONGO_INITDB_DATABASE: diary-api
+
+  users:
+    image: rasouza/diary-api-users
     ports:
-      - '27017:27017'
-    volumes:
-      - ./storage/database:/data/db
-    environment:
-      MONGO_INITDB_DATABASE: diary-api
+      - 8000:8000
