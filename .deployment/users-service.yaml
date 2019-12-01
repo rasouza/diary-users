@@ -7,13 +7,16 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: users
+    app: users
+    service: users
   name: users
+  namespace: diary
 spec:
   ports:
-  - name: "8000"
+  - name: http
     port: 8000
     targetPort: 8000
   selector:
-    io.kompose.service: users
+    app: users
 status:
   loadBalancer: {}

@@ -7,9 +7,12 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: users
+    app: users
+    version: v1
   name: users
+  namespace: diary
 spec:
-  replicas: 1
+  replicas: 2
   strategy: {}
   template:
     metadata:
@@ -19,11 +22,12 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: users
+        app: users
+        version: v1
     spec:
       containers:
       - image: rasouza/diary-api-users
         name: users
-        command: ["php", "artisan", "serve"]
         ports:
         - containerPort: 8000
         resources: {}

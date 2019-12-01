@@ -1,16 +1,20 @@
 version: '3.4'
 
 services:
-  # db:
-  #   image: mongo:4.1
-  #   ports:
-  #     - '27017:27017'
-  #   volumes:
-  #     - ./storage/database:/data/db
-  #   environment:
-  #     MONGO_INITDB_DATABASE: diary-api
+  db:
+    image: mongo:4.1
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./storage/database:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: diary-api
 
   users:
-    image: rasouza/diary-api-users
+    build:
+      dockerfile: .deployment/Dockerfile
+      context: .
     ports:
       - 8000:8000
+    volumes:
+      - .:/home/circleci
