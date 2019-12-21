@@ -1,6 +1,8 @@
 steps:
-  - name: "Docker Test %n"
-    command: php artisan
+
+  - name: ":hammer:"
+    command:
+      - vendor/bin/phpunit
     plugins:
-      - docker-compose#v3.0.3:
+      - docker-compose#v3.1.0:
           run: users

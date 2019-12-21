@@ -7,7 +7,11 @@ RUN sudo apt update \
 
 WORKDIR /home/circleci
 
+COPY --chown="circleci:circleci" composer* ./
+COPY --chown="circleci:circleci" database/ database/
+COPY --chown="circleci:circleci" tests/ tests/
+RUN composer install -n --prefer-dist
+
 COPY --chown="circleci:circleci" . .
-RUN composer install
 
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]

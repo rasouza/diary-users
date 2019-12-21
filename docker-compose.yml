@@ -16,5 +16,5 @@ services:
       context: .
     ports:
       - 8000:8000
-    volumes:
-      - .:/home/circleci
+    depends_on:
+      - db
