@@ -1,5 +1,5 @@
 steps:
   - name: ":kubernetes: ${IMAGE_TAG:-latest}"
-    command: helm upgrade diary-users --set image.tag="${IMAGE_TAG:-latest}"
+    command: helm upgrade diary-users --set image.tag="${IMAGE_TAG:-latest}" .deployment/chart
     concurrency: 1
     concurrency_group: deploy/diary-users
