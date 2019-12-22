@@ -1,8 +1,21 @@
 steps:
 
-  - name: ":hammer:"
-    command:
-      - vendor/bin/phpunit
+  - name: ":phpunit:"
+    command: vendor/bin/phpunit
     plugins:
       - docker-compose#v3.1.0:
           run: users
+
+  - wait
+
+  - name: ":docker:"
+    branches: master
+    plugins:
+      - docker-compose#v3.1.0:
+          push: users:rasouza/diary-users:latest
+
+  - name: ":docker:"
+    if: build.tag =~ /^v.*/
+    plugins:
+      - docker-compose#v3.1.0:
+          push: users:rasouza/diary-users:${BUILDKITE_TAG:1:8}
