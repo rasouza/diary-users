@@ -11,10 +11,8 @@ services:
       MONGO_INITDB_DATABASE: diary-api
 
   users:
-    build:
-      dockerfile: .deployment/Dockerfile
-      context: .
+    build: .
     ports:
       - 8000:8000
-    volumes:
-      - .:/home/circleci
+    depends_on:
+      - db
