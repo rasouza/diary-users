@@ -1,7 +1,9 @@
 steps:
 
   - name: ":phpunit:"
-    command: vendor/bin/phpunit
+    command:
+      - sleep 2
+      - vendor/bin/phpunit
     plugins:
       - docker-compose#v3.1.0:
           run: users
