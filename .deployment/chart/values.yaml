@@ -1,0 +1,11 @@
+name: users
+namespace: diary
+
+image:
+  name: rasouza/diary-users
+  tag: 0.2.0
+
+replicas: 2
+
+service:
+  port: 8000
