@@ -15,7 +15,7 @@ $router->get('/', function () use ($router) {
     return 'Hello Users!';
 });
 
-$router->get('headers', function(Illuminate\Http\Request $request) use ($router) {
+$router->get('headers', function() use ($router) {
     dd(app('request')->header());
 });
 
