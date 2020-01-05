@@ -14,31 +14,6 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'nickname' => $faker->userName,
         'email' => $faker->email,
-        'avatar' => $faker->imageUrl
     ];
 });
-
-$factory->define(App\Token::class, function(Faker\Generator $faker) {
-    return [
-        'provider' => 'github',
-        'code' => $faker->md5
-    ];
-});
-
-$factory->state(App\Token::class, 'github', function(Faker\Generator $faker) {
-    return [
-        'provider' => 'github',
-        'code' => $faker->md5
-    ];
-});
-
-$factory->state(App\Token::class, 'twitter', function(Faker\Generator $faker) {
-    return [
-        'provider' => 'twitter',
-        'code' => $faker->md5
-    ];
-});
-
-

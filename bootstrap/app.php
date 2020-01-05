@@ -21,15 +21,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-$app->withFacades(
-    true,
-    [
-        Laravel\Socialite\Facades\Socialite::class => 'Socialite',
-        Jenssegers\Mongodb\Eloquent\Model::class => 'Moloquent',
-    ]
-);
+// $app->withFacades();
 
-$app->configure('services');
+// $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -82,14 +76,10 @@ $app->singleton(
 |
 */
 
-$app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Laravel\Socialite\SocialiteServiceProvider::class);
-$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
-$app->register(Gentux\Healthz\Support\HealthzServiceProvider::class);
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-$app->withEloquent();
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -106,6 +96,5 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
-
 
 return $app;

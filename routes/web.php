@@ -12,12 +12,5 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Hello Users!';
+    return $router->app->version();
 });
-
-$router->get('headers', function() use ($router) {
-    dd(app('request')->header());
-});
-
-$router->get('login/github', 'Auth\LoginController@redirectGithub');
-$router->get('oauth/github/callback', 'Auth\LoginController@handleGithubCallback');
