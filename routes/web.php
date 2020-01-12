@@ -11,6 +11,9 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('/', 'AuthController@login');
+$router->get('/oauth/google/callback', 'AuthController@callback');
+
+$router->get('/headers', function () {
+    dd(app('request')->header());
 });
