@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+
 class AuthController extends Controller
 {
     private $provider;
@@ -13,24 +16,24 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->provider = new \League\OAuth2\Client\Provider\GenericProvider([
-            'clientId'                => 'diary-users',    // The client ID assigned to you by the provider
-            'clientSecret'            => 'ZXhhbXBsZS1hcHAtc2VjcmV0',   // The client password assigned to you by the provider
-            'redirectUri'             => 'http://localhost:8000/oauth/google/callback',
-            'urlAuthorize'            => 'http://localhost:5556/dex/auth?scope=openid',
-            'urlAccessToken'          => 'http://localhost:5556/dex/token',
-            'urlResourceOwnerDetails' => 'http://localhost:5556/dex/userinfo'
+            'clientId'                => 'auth-code-client',    // The client ID assigned to you by the provider
+            'clientSecret'            => 'secret',   // The client password assigned to you by the provider
+            'redirectUri'             => 'http://localhost:8000/oauth2/callback',
+            'urlAuthorize'            => 'http://localhost:4444/oauth2/auth',
+            'urlAccessToken'          => 'http://localhost:4444/oauth2/token',
+            'urlResourceOwnerDetails' => 'http://localhost:4444/userinfo'
         ]);
     }
 
-    public function login()
+    public function auth()
     {
-        echo $this->provider->getAuthorizationUrl();
+        return redirect($this->provider->getAuthorizationUrl());
     }
 
-    public function callback()
+    public function callback(Request $request)
     {
         $accessToken = $this->provider->getAccessToken('authorization_code', [
-            'code' => $_GET['code']
+            'code' => $request->input('code')
         ]);
 
         // We have an access token, which we may use in authenticated
@@ -44,12 +47,6 @@ class AuthController extends Controller
         // resource owner.
         $resourceOwner = $this->provider->getResourceOwner($accessToken);
 
-        var_export($resourceOwner->toArray());
-        $request = $this->provider->getAuthenticatedRequest(
-            'GET',
-            'http://localhost:5556/dex/userinfo',
-            $accessToken
-        );
-        dd($request);
+        dd($accessToken, $resourceOwner);
     }
 }
