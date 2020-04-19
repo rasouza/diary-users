@@ -1,4 +1,3 @@
-
 FROM composer AS build
 
 COPY composer.lock composer.json /var/www/
@@ -21,10 +20,13 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS curl-dev libtool libxm
     && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && apk del -f .build-deps
 
-COPY --from=build /var/www/vendor /var/www/vendor
+COPY --from=build /var/www/composer.lock /var/www/composer.json /var/www/
+COPY --from=build /var/www/database /var/www/database
+COPY --from=build /var/www/tests /var/www/tests
 
 WORKDIR /var/www
 
+RUN composer install --no-dev --no-scripts
 COPY . .
 
 RUN chown -R www-data:www-data /var/www
