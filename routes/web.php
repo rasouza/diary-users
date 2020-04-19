@@ -11,7 +11,6 @@
 |
 */
 
-$router->get('/', 'AuthController@login');
 $router->get('/auth', 'AuthController@auth');
 $router->get('/oauth2/callback', 'AuthController@callback');
 
