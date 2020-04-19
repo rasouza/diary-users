@@ -28,3 +28,5 @@ WORKDIR /var/www
 COPY . .
 
 RUN chown -R www-data:www-data /var/www
+
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
