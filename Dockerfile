@@ -11,7 +11,7 @@ COPY --chown="circleci:circleci" composer* ./
 COPY --chown="circleci:circleci" database/ database/
 COPY --chown="circleci:circleci" tests/ tests/
 RUN composer install -n --prefer-dist
-
+RUN ls -l
 COPY --chown="circleci:circleci" . .
 
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
