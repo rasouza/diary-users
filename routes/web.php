@@ -25,3 +25,7 @@ $router->get('/token-info', 'LoginController@acceptConsent');
 $router->get('/headers', function () {
     dd(app('request')->header());
 });
+
+$router->get('/env', function () {
+    dd($_ENV);
+});
