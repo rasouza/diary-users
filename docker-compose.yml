@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  users:
+    image: rasouza/diary-users
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/www/
+    environment:
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      IDP_URL: http://idp:4444
+      APP_URL: http://users:8000
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: diary-user
+      DB_PASSWORD: secret
+      DB_DATABASE: diary
+
+  db:
+    image: postgres:12.2
+    environment:
+      - POSTGRES_USER=diary-user
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=diary
+    ports:
+      - 5433:5432
+

@@ -10,13 +10,13 @@ RUN composer install --ignore-platform-reqs --no-interaction --no-plugins --no-s
 
 COPY . .
 
+CMD ["vendor/bin/phpunit"]
+
 FROM php:7.3-fpm-alpine AS app
 
-RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS curl-dev libtool libxml2-dev \
-    && apk add --no-cache curl git libintl icu icu-dev libzip-dev libbson-dev \
-    && pecl install mongodb-1.5.5 \
-    && docker-php-ext-install bcmath curl iconv mbstring pdo pcntl tokenizer xml zip intl \
-    && docker-php-ext-enable mongodb \
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS curl-dev libtool libxml2-dev postgresql-dev \
+    && apk add --no-cache curl git libintl icu icu-dev libzip-dev libbson-dev libpq \
+    && docker-php-ext-install bcmath curl iconv mbstring pdo pdo_pgsql pcntl tokenizer xml zip intl \
     && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && apk del -f .build-deps
 

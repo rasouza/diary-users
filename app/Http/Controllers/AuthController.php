@@ -16,16 +16,16 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->provider = new \League\OAuth2\Client\Provider\GenericProvider([
-            'clientId'                => 'auth-code-client',    // The client ID assigned to you by the provider
+            'clientId'                => 'diary-users',    // The client ID assigned to you by the provider
             'clientSecret'            => 'secret',   // The client password assigned to you by the provider
-            'redirectUri'             => 'http://localhost:8000/oauth2/callback',
-            'urlAuthorize'            => 'http://localhost:4444/oauth2/auth',
-            'urlAccessToken'          => 'http://localhost:4444/oauth2/token',
-            'urlResourceOwnerDetails' => 'http://localhost:4444/userinfo'
+            'redirectUri'             => env('APP_URL') . '/oauth2/callback',
+            'urlAuthorize'            => env('IDP_URL') . '/oauth2/auth',
+            'urlAccessToken'          => env('IDP_URL') . '/oauth2/token',
+            'urlResourceOwnerDetails' => env('IDP_URL') . '/userinfo'
         ]);
     }
 
-    public function auth()
+    public function auth(Request $request)
     {
         return redirect($this->provider->getAuthorizationUrl());
     }
@@ -45,7 +45,7 @@ class AuthController extends Controller
 
         // Using the access token, we may look up details about the
         // resource owner.
-        $resourceOwner = $this->provider->getResourceOwner($accessToken);
+        $resourceOwner = $this->provider->getResourceOwner($accessToken)->toArray();
 
         dd($accessToken, $resourceOwner);
     }

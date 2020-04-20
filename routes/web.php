@@ -13,12 +13,13 @@
 
 $router->get('/auth', 'AuthController@auth');
 $router->get('/oauth2/callback', 'AuthController@callback');
+$router->get('/oauth2/github/auth', 'GithubController@auth');
+$router->get('/oauth2/github/callback', 'GithubController@callback');
 
 // HYDRA endpoints
-$router->get('/login', 'LoginController@index');
 $router->get('/consent', 'LoginController@showConsent');
-$router->get('/accept-login/{challenge}', 'LoginController@acceptLogin');
-$router->get('/accept-consent/{challenge}', 'LoginController@acceptConsent');
+$router->get('/accept-login/{user}', 'LoginController@acceptLogin');
+$router->get('/accept-consent', 'LoginController@acceptConsent');
 $router->get('/token-info', 'LoginController@acceptConsent');
 
 $router->get('/headers', function () {
