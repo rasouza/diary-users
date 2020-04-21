@@ -12,7 +12,7 @@ class LoginController extends BaseController
     private $client;
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://localhost:4445/oauth2/auth/']);
+        $this->client = new Client(['base_uri' => env('IDP_ADMIN_URL') . '/oauth2/auth/']);
     }
 
     public function acceptLogin(Request $request, $user) {
