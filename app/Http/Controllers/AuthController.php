@@ -19,8 +19,8 @@ class AuthController extends Controller
             'clientId'                => env('IDP_CLIENT_ID'),    // The client ID assigned to you by the provider
             'clientSecret'            => env('IDP_CLIENT_SECRET'),   // The client password assigned to you by the provider
             'redirectUri'             => env('APP_URL') . '/oauth2/callback',
-            'urlAuthorize'            => env('IDP_URL') . '/oauth2/auth',
-            'urlAccessToken'          => 'http://idp-svc:4444/oauth2/token',
+            'urlAuthorize'            => env('IDP_EXTERNAL_URL') . '/oauth2/auth',
+            'urlAccessToken'          => env('IDP_URL') . '/oauth2/token',
             'urlResourceOwnerDetails' => env('IDP_URL') . '/userinfo'
         ]);
     }
