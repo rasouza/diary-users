@@ -27,10 +27,6 @@ php artisan serve
 php artisan test
 ```
 
-## License
-
-The Diary Users component is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
