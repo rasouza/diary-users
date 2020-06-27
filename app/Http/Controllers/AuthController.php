@@ -19,7 +19,7 @@ class AuthController extends Controller
         $this->provider = $provider;
     }
 
-    public function auth(Request $request)
+    public function auth()
     {
         return redirect($this->provider->getAuthorizationUrl());
     }
@@ -39,7 +39,6 @@ class AuthController extends Controller
 
         // Using the access token, we may look up details about the
         // resource owner.
-        $resourceOwner = $this->provider->getResourceOwner($accessToken)->toArray();
 
         return response()->withCookie('meu_token', $accessToken)->json(['jwt' => $accessToken->id_token]);
     }

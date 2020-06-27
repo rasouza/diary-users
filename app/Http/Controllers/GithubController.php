@@ -10,10 +10,10 @@ class GithubController extends Controller
 {
     private $provider;
 
-    private function persist($user_info)
+    private function persist($userInfo)
     {
-        $user = User::firstOrNew([ 'email' => $user_info['email'] ]);
-        $user->fill($user_info);
+        $user = User::firstOrNew([ 'email' => $userInfo['email'] ]);
+        $user->fill($userInfo);
         $user->save();
 
         return $user;
@@ -35,7 +35,8 @@ class GithubController extends Controller
         ];
     }
 
-    public function __construct(Github $github) {
+    public function __construct(Github $github)
+    {
         $this->provider = $github;
     }
 
@@ -47,8 +48,8 @@ class GithubController extends Controller
 
     public function callback(Request $request)
     {
-        $user_info = $this->getUserInfo($request->input('code'));
-        $user = $this->persist($user_info);
+        $userInfo = $this->getUserInfo($request->input('code'));
+        $user = $this->persist($userInfo);
 
         $challenge = $request->input('state');
         return redirect("/accept-login/{$user->username}?login_challenge={$challenge}");
