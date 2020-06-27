@@ -10,7 +10,9 @@ RUN composer install --ignore-platform-reqs --no-interaction --no-plugins --no-s
 
 COPY . .
 
-CMD ["vendor/bin/phpunit"]
+RUN php artisan config:clear
+
+CMD ["php", "artisan", "test"]
 
 FROM php:7.3-fpm-alpine AS app
 

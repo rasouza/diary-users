@@ -10,12 +10,8 @@ class GithubController extends Controller
 {
     private $provider;
 
-    public function __construct() {
-        $this->provider = new Github([
-            'clientId' => env('GITHUB_CLIENT_ID'),
-            'clientSecret' => env('GITHUB_CLIENT_SECRET'),
-            'redirectUri' => env('APP_URL') . '/oauth2/github/callback'
-        ]);
+    public function __construct(Github $github) {
+        $this->provider = $github;
     }
 
     public function auth(Request $request)
@@ -41,6 +37,7 @@ class GithubController extends Controller
         $user->save();
 
         $challenge = $request->input('state');
+        dump($accessToken, $resourceOwner, $user);
         return redirect("/accept-login/{$user->username}?login_challenge={$challenge}");
     }
 }
