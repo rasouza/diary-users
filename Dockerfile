@@ -10,9 +10,17 @@ RUN composer install --ignore-platform-reqs --no-interaction --no-plugins --no-s
 
 COPY . .
 
-RUN php artisan config:clear
+FROM php:7.3-cli AS testing
 
-CMD ["php", "artisan", "test"]
+RUN pecl install xdebug-2.9.6 \
+    && docker-php-ext-enable xdebug
+
+COPY --from=build /var/www /var/www
+
+WORKDIR /var/www
+
+RUN php artisan config:clear
+CMD ["php", "artisan", "test", "--coverage-clover", "./build/logs/clover.xml"]
 
 FROM php:7.3-fpm-alpine AS app
 

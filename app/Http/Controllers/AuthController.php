@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function __construct(GenericProvider $provider)
     {
-        $this->provider = $provider
+        $this->provider = $provider;
     }
 
     public function auth(Request $request)
@@ -41,7 +41,6 @@ class AuthController extends Controller
         // resource owner.
         $resourceOwner = $this->provider->getResourceOwner($accessToken)->toArray();
 
-        // dd($accessToken, $resourceOwner);
-        return response()->withCookie('meu_token', $accessToken)->json(['jwt' => $accessToken->id_token])
+        return response()->withCookie('meu_token', $accessToken)->json(['jwt' => $accessToken->id_token]);
     }
 }
