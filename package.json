@@ -4,6 +4,7 @@
     "@auto-it/conventional-commits": "^9.40.5",
     "@auto-it/first-time-contributor": "^9.40.5",
     "@auto-it/git-tag": "^9.40.5",
-    "all-contributors-cli": "^6.16.0"
+    "all-contributors-cli": "^6.16.0",
+    "auto": "^9.40.5"
   }
 }
