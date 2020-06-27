@@ -58,7 +58,7 @@ class GithubTest extends TestCase
 
         $response = $this->get("/oauth2/github/callback?state={$challenge}");
 
-        $response->assertRedirect("/accept-login/dummy123?login_challenge=my_hash_challenge");
+        $response->assertRedirect("/accept-login/dummy123?login_challenge=my_hash_challenge&avatar=http://dummy.com/image.png&name=Dummy User");
         $this->assertDatabaseHas('users', ['email' => 'dummy@email.com']);
     }
 }
