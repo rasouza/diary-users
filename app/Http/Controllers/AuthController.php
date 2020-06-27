@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use \League\OAuth2\Client\Provider\GenericProvider;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -30,16 +31,7 @@ class AuthController extends Controller
             'code' => $request->input('code')
         ]);
 
-        // We have an access token, which we may use in authenticated
-        // requests against the service provider's API.
-        echo 'Access Token: ' . $accessToken->getToken() . "<br>";
-        echo 'Refresh Token: ' . $accessToken->getRefreshToken() . "<br>";
-        echo 'Expired in: ' . $accessToken->getExpires() . "<br>";
-        echo 'Already expired? ' . ($accessToken->hasExpired() ? 'expired' : 'not expired') . "<br>";
-
-        // Using the access token, we may look up details about the
-        // resource owner.
-
-        return response()->withCookie('meu_token', $accessToken)->json(['jwt' => $accessToken->id_token]);
+        Cookie::queue('login', $accessToken->getToken(), 60*24*30); // 30 days
+        return redirect()->away(env('FRONTEND_URL'));
     }
 }
