@@ -47,6 +47,7 @@ class AuthController extends Controller
         // resource owner.
         $resourceOwner = $this->provider->getResourceOwner($accessToken)->toArray();
 
-        dd($accessToken, $resourceOwner);
+        // dd($accessToken, $resourceOwner);
+        return response()->withCookie('meu_token', $accessToken)->json(['jwt' => $accessToken->id_token])
     }
 }
