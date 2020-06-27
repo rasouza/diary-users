@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use \League\OAuth2\Client\Provider\GenericProvider;
 
 class AuthController extends Controller
 {
@@ -13,16 +14,9 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(GenericProvider $provider)
     {
-        $this->provider = new \League\OAuth2\Client\Provider\GenericProvider([
-            'clientId'                => env('IDP_CLIENT_ID'),    // The client ID assigned to you by the provider
-            'clientSecret'            => env('IDP_CLIENT_SECRET'),   // The client password assigned to you by the provider
-            'redirectUri'             => env('APP_URL') . '/oauth2/callback',
-            'urlAuthorize'            => env('IDP_EXTERNAL_URL') . '/oauth2/auth',
-            'urlAccessToken'          => env('IDP_URL') . '/oauth2/token',
-            'urlResourceOwnerDetails' => env('IDP_URL') . '/userinfo'
-        ]);
+        $this->provider = $provider
     }
 
     public function auth(Request $request)
