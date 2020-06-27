@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use \League\OAuth2\Client\Provider\GenericProvider;
+use \League\OAuth2\Client\Provider\Github;
+
 class OAuthServiceProvider extends ServiceProvider
 {
     /**
