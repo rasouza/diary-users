@@ -1,3 +1,15 @@
+# v1.1.0 (Sat Jun 27 2020)
+
+#### 🚀 Enhancement
+
+- adds auto release notes [#18](https://github.com/rasouza/diary-users/pull/18) ([@rasouza](https://github.com/rasouza))
+
+#### Authors: 1
+
+- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
+
+---
+
 # v0.0.1 (Sat Jun 27 2020)
 
 
