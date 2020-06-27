@@ -10,7 +10,6 @@ RUN composer install --ignore-platform-reqs --no-interaction --no-plugins --no-s
 
 COPY . .
 
-RUN php artisan key:generate
 RUN php artisan config:clear
 
 CMD ["php", "artisan", "test"]
