@@ -1,6 +1,6 @@
 plugins:
   phan:
-    enabled: true
+    enabled: false
     config:
       file_extensions: "php"
   fixme:
