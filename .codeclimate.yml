@@ -9,3 +9,5 @@ plugins:
     enabled: true
   sonar-php:
     enabled: true
+  phpcodesniffer:
+    enabled: true
