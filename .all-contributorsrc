@@ -1,0 +1,14 @@
+{
+  "projectName": "diary-users",
+  "projectOwner": "rasouza",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [],
+  "contributorsPerLine": 7
+}
