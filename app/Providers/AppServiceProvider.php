@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('League\OAuth2\Client\Provider\Github', function() {
+        $this->app->bind('League\OAuth2\Client\Provider\Github', function () {
             return new Github([
                 'clientId' => env('GITHUB_CLIENT_ID'),
                 'clientSecret' => env('GITHUB_CLIENT_SECRET'),
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
-        $this->app->bind('League\OAuth2\Client\Provider\GenericProvider', function() {
+        $this->app->bind('League\OAuth2\Client\Provider\GenericProvider', function () {
             return new GenericProvider([
                 'clientId'                => env('IDP_CLIENT_ID'),    // The client ID assigned to you by the provider
                 'clientSecret'            => env('IDP_CLIENT_SECRET'),   // The client password assigned to you by the provider

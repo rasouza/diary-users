@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
-
 class HydraController extends Controller
 {
     private $client;
@@ -14,12 +13,14 @@ class HydraController extends Controller
         $this->client = new Client(['base_uri' => env('IDP_ADMIN_URL') . '/oauth2/auth/']);
     }
 
-    public function acceptLogin(Request $request, $user) {
+    public function acceptLogin(Request $request, $user)
+    {
         $body = [
             'subject' => $user
         ];
         $challenge = $request->input('login_challenge');
-        $response = $this->client->request('PUT', "requests/login/accept?login_challenge={$challenge}", ['json' => $body]);
+        $url = "requests/login/accept?login_challenge={$challenge}";
+        $response = $this->client->request('PUT', $url, ['json' => $body]);
         $response = json_decode($response->getBody());
         return redirect($response->redirect_to);
     }
@@ -43,7 +44,8 @@ class HydraController extends Controller
             ]
         ];
 
-        $response = $this->client->request('PUT', "requests/consent/accept?consent_challenge={$challenge}", ['json' => $body]);
+        $url = "requests/consent/accept?consent_challenge={$challenge}";
+        $response = $this->client->request('PUT', $url, ['json' => $body]);
         $response = json_decode($response->getBody());
         return redirect($response->redirect_to);
     }
