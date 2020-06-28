@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/headers', function (Request $request) {
-    dd($request->cookie('login'));
+    dd($request->header());
 });
 
 Route::get('/auth', 'AuthController@auth');
