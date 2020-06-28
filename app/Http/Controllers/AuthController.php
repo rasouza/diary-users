@@ -32,6 +32,8 @@ class AuthController extends Controller
         ]);
 
         Cookie::queue('login', $accessToken->getToken(), 60*24*30); // 30 days
-        return redirect()->away(env('FRONTEND_URL'));
+
+        dd($accessToken, $this->provider->getResourceOwner($accessToken)->toArray());
+        // return redirect()->away(env('FRONTEND_URL'));
     }
 }
