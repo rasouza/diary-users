@@ -37,11 +37,6 @@ class HydraController extends Controller
         $body = [
             'grant_scope' => ['openid'],
             'remember' => false,
-            'session' => [
-                'id_token' => [
-                    'user' => 'user2'
-                ]
-            ]
         ];
 
         $url = "requests/consent/accept?consent_challenge={$challenge}";
