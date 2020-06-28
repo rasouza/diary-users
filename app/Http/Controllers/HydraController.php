@@ -34,9 +34,10 @@ class HydraController extends Controller
 
         $response = $this->client->get($url);
         $response = json_decode($response->getBody());
-        extract(get_object_vars($response->context));
+        $context = $response->context;
 
-        return redirect("/accept-consent?consent_challenge={$challenge}&name={$name}&avatar={$avatar}");
+        $url = "/accept-consent?consent_challenge={$challenge}&name={$context->name}&avatar={$context->avatar}";
+        return redirect($url);
     }
 
     public function acceptConsent(Request $request)
