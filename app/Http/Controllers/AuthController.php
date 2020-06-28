@@ -31,9 +31,8 @@ class AuthController extends Controller
             'code' => $request->input('code')
         ]);
 
-        Cookie::queue('login', $accessToken->getToken(), 60*24*30); // 30 days
+        $idToken = $accessToken->getValues()['id_token'];
 
-        dd($accessToken, $this->provider->getResourceOwner($accessToken)->toArray());
-        // return redirect()->away(env('FRONTEND_URL'));
+        return redirect()->away(env('FRONTEND_URL') . "/auth/callback#{$idToken}");
     }
 }

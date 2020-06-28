@@ -52,6 +52,6 @@ class GithubController extends Controller
         $user = $this->persist($userInfo);
 
         $challenge = $request->input('state');
-        return redirect("/accept-login/{$user->username}?login_challenge={$challenge}");
+        return redirect("/accept-login/{$user->username}?login_challenge={$challenge}&avatar={$user->avatar}&name={$user->name}");
     }
 }
