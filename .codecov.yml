@@ -1,3 +1,3 @@
 ignore:
   - app/Providers/OAuthServiceProvider.php
-  - app/Http/Controller/HydraController.php
+  - app/Http/Controllers/HydraController.php
