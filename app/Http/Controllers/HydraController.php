@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 
 class HydraController extends Controller
 {
     private $client;
-    public function __construct()
+    public function __construct(\GuzzleHttp\Client $client)
     {
-        $this->client = new Client(['base_uri' => env('IDP_ADMIN_URL') . '/oauth2/auth/']);
+        $this->client = $client;
     }
 
     public function acceptLogin(Request $request, $user)
