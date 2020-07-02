@@ -33,6 +33,6 @@ class AuthController extends Controller
 
         $idToken = $accessToken->getValues()['id_token'];
 
-        return redirect()->away(env('FRONTEND_URL') . "/auth/callback#{$idToken}");
+        return redirect()->away(config('url.frontend') . "/auth/callback#{$idToken}");
     }
 }
