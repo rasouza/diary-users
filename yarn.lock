@@ -21,12 +21,17 @@
   resolved "https://registry.yarnpkg.com/@auto-it/bot-list/-/bot-list-9.40.5.tgz#11b5b0eeb642139b6964a7f6b9c445546e73c582"
   integrity sha512-bqNfmY2CWFfmwAoSqmh3a3P77+Bu8zBm1TqSjUEGmqHsbJ5GQjmR4MxGdq5rLB+wsXj8mKOzuMBopXnEOOPXRg==
 
-"@auto-it/conventional-commits@^9.40.5":
-  version "9.40.5"
-  resolved "https://registry.yarnpkg.com/@auto-it/conventional-commits/-/conventional-commits-9.40.5.tgz#e7377f0d4c95c470e1ba8b614bea2d353b97197e"
-  integrity sha512-/1MddC/HV5ICwijSb7p7DAaGG829VDoNJhjhPZIVX0tVQOK2gBEKMQfks2yo2dorkz0sHNrX+JdJ8T75YHoa3g==
+"@auto-it/bot-list@^9.41.1":
+  version "9.41.1"
+  resolved "https://registry.yarnpkg.com/@auto-it/bot-list/-/bot-list-9.41.1.tgz#d7d9000d34a3b3dc603b04367ace27e373adc60f"
+  integrity sha512-jsl6JYi4hchjaEPEZFvQ5nR0Q5nAhEXb8As714o+t7kjh4LSBPTh1pjN+C8PIgYuLp7PavI1QSMTug3NRV+XfA==
+
+"@auto-it/conventional-commits@^9.41.1":
+  version "9.41.1"
+  resolved "https://registry.yarnpkg.com/@auto-it/conventional-commits/-/conventional-commits-9.41.1.tgz#202e6b1eb7091af60f0eb7532f748b3ed4d544e5"
+  integrity sha512-HwYreHx3ROqAWic3pUqrpEAFsu/OGn481BX8ZuwMG7sFO8crsva8eUjcayq7P3DJuidke7paBFqhpmLVDb4mkg==
   dependencies:
-    "@auto-it/core" "^9.40.5"
+    "@auto-it/core" "^9.41.1"
     parse-commit-message "4.0.0"
     tslib "2.0.0"
 
@@ -36,6 +41,46 @@
   integrity sha512-EmuxNU4gYWxdnlQzeB2Il7pWJe12SDKFG4TnaapEba3fjnfNlPSlVcgBjAowZNGOhhPkhfxkeKUE6aXcHLtplg==
   dependencies:
     "@auto-it/bot-list" "^9.40.5"
+    "@octokit/graphql" "^4.4.0"
+    "@octokit/plugin-enterprise-compatibility" "^1.2.2"
+    "@octokit/plugin-retry" "^3.0.1"
+    "@octokit/plugin-throttling" "^3.2.0"
+    "@octokit/rest" "^18.0.0"
+    await-to-js "^2.1.1"
+    chalk "^4.0.0"
+    cosmiconfig "6.0.0"
+    deepmerge "^4.0.0"
+    dotenv "^8.0.0"
+    endent "^2.0.1"
+    enquirer "^2.3.4"
+    env-ci "^5.0.1"
+    fast-glob "^3.1.1"
+    fp-ts "^2.5.3"
+    fromentries "^1.2.0"
+    gitlog "^4.0.0"
+    https-proxy-agent "^5.0.0"
+    import-cwd "^3.0.0"
+    import-from "^3.0.0"
+    io-ts "^2.1.2"
+    lodash.chunk "^4.2.0"
+    log-symbols "^4.0.0"
+    node-fetch "2.6.0"
+    parse-github-url "1.0.2"
+    semver "^7.0.0"
+    signale "^1.4.0"
+    tapable "^2.0.0-beta.2"
+    terminal-link "^2.1.1"
+    tinycolor2 "^1.4.1"
+    tslib "2.0.0"
+    typescript-memoize "^1.0.0-alpha.3"
+    url-join "^4.0.0"
+
+"@auto-it/core@^9.41.1":
+  version "9.41.1"
+  resolved "https://registry.yarnpkg.com/@auto-it/core/-/core-9.41.1.tgz#6b1caff74f21b5a0ec0b5fd0b31f592d04206b49"
+  integrity sha512-i4Vi/CQvRJcf6N8yBL1jaAZn47e1Lkt0aG3L1YpERBHfiqQzwiF9UqWtYbzkNwKt4mZqckR66J9vqyG6EGlp1w==
+  dependencies:
+    "@auto-it/bot-list" "^9.41.1"
     "@octokit/graphql" "^4.4.0"
     "@octokit/plugin-enterprise-compatibility" "^1.2.2"
     "@octokit/plugin-retry" "^3.0.1"
@@ -116,6 +161,17 @@
   integrity sha512-z+sFrQFzbaHrDtIEfQkFzyAtAJBwyTG8S2S4ry22wHSk4oDkgc8YyteEuRxtmL3L3zYx2T3KTMA3hraACqA8yA==
   dependencies:
     "@auto-it/core" "^9.40.5"
+    deepmerge "^4.0.0"
+    fp-ts "^2.5.3"
+    io-ts "^2.1.2"
+    tslib "2.0.0"
+
+"@auto-it/released@^9.41.1":
+  version "9.41.1"
+  resolved "https://registry.yarnpkg.com/@auto-it/released/-/released-9.41.1.tgz#b1d42e8e0ea60be7a549c25505d0aa92611c15f4"
+  integrity sha512-ycxeowza0fsVW16Fr9D1RCDCkAhUhIsvNvl04U7kSdeHp0ELcXFvwL4I/zSgpZ45PHV+XcUW3+9NcOElDmTZug==
+  dependencies:
+    "@auto-it/core" "^9.41.1"
     deepmerge "^4.0.0"
     fp-ts "^2.5.3"
     io-ts "^2.1.2"
@@ -290,6 +346,15 @@
   integrity sha512-GorvORVwp244fGKEt3cgt/P+M0MGy4xEDbckw+K5ojEezxyMDgCaYPKVct+/eWQfZXOT7uq0xRpmrl/+hliabA==
   dependencies:
     "@types/node" ">= 8"
+
+"@prettier/plugin-php@^0.14.2":
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.14.2.tgz#d19c6fb8d177633f3d404d733f0e8cfc23741b3e"
+  integrity sha512-sG713Vb/eKtlB4rsL1+7mDD85jC2cjop8z/LE2QZHBtbopemfa4okEha01fgCqMaLJ80NBwGP9SZIwY9MR/w6w==
+  dependencies:
+    linguist-languages "^7.5.1"
+    mem "^6.0.1"
+    php-parser glayzzle/php-parser#5a0e2e1bf12517bd1c544c0f4e68482d0362a7b5
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
@@ -1357,6 +1422,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+linguist-languages@^7.5.1:
+  version "7.10.0"
+  resolved "https://registry.yarnpkg.com/linguist-languages/-/linguist-languages-7.10.0.tgz#c2098dfe6c5a4ab665fb78f13b190344e4cff1af"
+  integrity sha512-Uqt94P4iAznscZtccnNE1IBi105U+fmQKEUlDJv54JDdFZDInomkepEIRpZLOQcPyGdcNu3JO9Tvo5wpQVbfKw==
+
 load-json-file@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-4.0.0.tgz#2f5f45ab91e33216234fd53adab668eb4ec0993b"
@@ -1409,10 +1479,25 @@ macos-release@^2.2.0:
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.3.0.tgz#eb1930b036c0800adebccd5f17bc4c12de8bb71f"
   integrity sha512-OHhSbtcviqMPt7yfw5ef5aghS2jzFVKEFyCJndQt2YpSQ9qRVSEv2axSJI1paVThEu+FFGs584h/1YhxjVqajA==
 
+map-age-cleaner@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz#7d583a7306434c055fe474b0f45078e6e1b4b92a"
+  integrity sha512-bJzx6nMoP6PDLPBFmg7+xRKeFZvFboMrGlxmNj9ClvX53KrmvM5bXFXEWjbz4cz1AFn+jWJ9z/DJSz7hrs0w3w==
+  dependencies:
+    p-defer "^1.0.0"
+
 meant@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/meant/-/meant-1.0.1.tgz#66044fea2f23230ec806fb515efea29c44d2115d"
   integrity sha512-UakVLFjKkbbUwNWJ2frVLnnAtbb7D7DsloxRd3s/gDpI8rdv8W5Hp3NaDb+POBI1fQdeussER6NB8vpcRURvlg==
+
+mem@^6.0.1:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/mem/-/mem-6.1.0.tgz#846eca0bd4708a8f04b9c3f3cd769e194ae63c5c"
+  integrity sha512-RlbnLQgRHk5lwqTtpEkBTQ2ll/CG/iB+J4Hy2Wh97PjgZgXgWJWrFF+XXujh3UUVLvR4OOTgZzcWMMwnehlEUg==
+  dependencies:
+    map-age-cleaner "^0.1.3"
+    mimic-fn "^3.0.0"
 
 merge-stream@^2.0.0:
   version "2.0.0"
@@ -1448,6 +1533,11 @@ mimic-fn@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
+
+mimic-fn@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-3.0.0.tgz#76044cfa8818bbf6999c5c9acadf2d3649b14b4b"
+  integrity sha512-PiVO95TKvhiwgSwg1IdLYlCTdul38yZxZMIcnDSFIBUm4BNZha2qpQ4GpJ++15bHoKDtrW2D69lMfFwdFYtNZQ==
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -1566,6 +1656,11 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
+
+p-defer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-defer/-/p-defer-1.0.0.tgz#9f6eb182f6c9aa8cd743004a7d4f96b196b0fb0c"
+  integrity sha1-n26xgvbJqozXQwBKfU+WsZaw+ww=
 
 p-finally@^1.0.0:
   version "1.0.0"
@@ -1699,6 +1794,10 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
+php-parser@glayzzle/php-parser#5a0e2e1bf12517bd1c544c0f4e68482d0362a7b5:
+  version "3.0.1"
+  resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/5a0e2e1bf12517bd1c544c0f4e68482d0362a7b5"
+
 picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
@@ -1721,6 +1820,11 @@ pkg-conf@^2.1.0:
   dependencies:
     find-up "^2.0.0"
     load-json-file "^4.0.0"
+
+prettier@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
+  integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
 
 psl@^1.1.28:
   version "1.8.0"

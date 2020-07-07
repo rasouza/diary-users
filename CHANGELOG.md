@@ -12,24 +12,6 @@
 
 # v0.0.1 (Sat Jun 27 2020)
 
-
-
----
-
-# v0.0.1 (Sat Jun 27 2020)
-
-
-
----
-
-# v0.0.1 (Sat Jun 27 2020)
-
-
-
----
-
-# v0.0.1 (Sat Jun 27 2020)
-
 #### 🐛 Bug Fix
 
 - adds codeclimate PHP plugins [#17](https://github.com/rasouza/diary-users/pull/17) ([@rasouza](https://github.com/rasouza))

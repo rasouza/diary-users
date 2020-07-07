@@ -9,5 +9,6 @@
   "owner": "rasouza",
   "repo": "diary-users",
   "name": "R. A. Souza",
-  "email": "alves.wm@gmail.com"
+  "email": "alves.wm@gmail.com",
+  "onlyPublishWithReleaseLabel": true
 }

@@ -1,10 +1,13 @@
 {
   "devDependencies": {
     "@auto-it/all-contributors": "^9.40.5",
-    "@auto-it/conventional-commits": "^9.40.5",
+    "@auto-it/conventional-commits": "^9.41.1",
     "@auto-it/first-time-contributor": "^9.40.5",
     "@auto-it/git-tag": "^9.40.5",
+    "@auto-it/released": "^9.41.1",
+    "@prettier/plugin-php": "^0.14.2",
     "all-contributors-cli": "^6.16.0",
-    "auto": "^9.40.5"
+    "auto": "^9.40.5",
+    "prettier": "^2.0.5"
   }
 }
