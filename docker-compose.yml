@@ -10,32 +10,51 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./storage/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   idp:
-    image: oryd/hydra:v1.4.5
-    command: serve all --dangerous-force-http
+    image: oryd/hydra:v1.7.4
     ports:
-      - "4444:4444"
-      - "4445:4445"
+      - "4444:4444" # Public port
+      - "4445:4445" # Admin port
+    command:
+      serve all --dangerous-force-http
     depends_on:
-      - idp_migrate
-      - db
+      - idp-migrate
     environment:
       DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
       URLS_SELF_ISSUER: http://localhost:4444
       URLS_CONSENT: http://localhost:8000/consent
       URLS_LOGIN: http://localhost:3000/auth/login
       URLS_LOGOUT: http://localhost:3000/auth/logout
-      OIDC_SUBJECT_IDENTIFIERS_SUPPORTED_TYPES: public,pairwise
       SECRETS_SYSTEM: youReallyNeedToChangeThis
+      OIDC_SUBJECT_IDENTIFIERS_SUPPORTED_TYPES: public,pairwise
       OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT: youReallyNeedToChangeThis
+      SERVE_COOKIES_SAME_SITE_MODE: Lax
+    restart: unless-stopped
 
+  idp-migrate:
+    image: oryd/hydra:v1.7.4
+    environment:
+      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
+    command:
+      migrate sql -e --yes
+    restart: on-failure
 
-  idp_migrate:
-    image: oryd/hydra:v1.4.5
-    command: migrate sql -e --yes
+  idp-client:
+    image: oryd/hydra:v1.7.4
+    command: >
+      clients create
+      --endpoint http://idp:4445
+      --id diary-users
+      --name diary-users
+      --secret secret
+      --grant-types authorization_code,refresh_token
+      --callbacks http://localhost:8000/oauth2/callback
+      --response-types code,id_token
+      --scope openid,offline
+      --token-endpoint-auth-method client_secret_post
     depends_on:
-      - db
+      - idp-migrate
     environment:
       DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
